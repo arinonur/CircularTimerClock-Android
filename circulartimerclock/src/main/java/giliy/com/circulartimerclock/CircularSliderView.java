@@ -31,15 +31,12 @@ public class CircularSliderView extends View {
     private float startMinutesAngle;
     private int endHourAngle;
     private float endMinutesAngle;
-    private Drawable backgoundImage;
     private int largestCenteredSquareLeft;
     private int largestCenteredSquareTop;
     private int largestCenteredSquareRight;
     private int largestCenteredSquareBottom;
 
-    public void setBackgroundImage(Drawable backgroundImage) {
-        this.backgoundImage = backgroundImage;
-    }
+
 
     /**
      * Listener interface used to detect when slider moves around.
@@ -196,7 +193,6 @@ public class CircularSliderView extends View {
         setEndThumbSize(endThumbSize);
         setStartThumbImage(thumbImage);
         setEndThumbImage(thumbEndImage);
-        setBackgroundImage(backgroundDrawable);
         setStartThumbColor(thumbColor);
         setArcColor(arcColor);
         setEndThumbColor(thumbEndColor);
@@ -267,7 +263,7 @@ public class CircularSliderView extends View {
 
         mLinePaint.setStyle(Paint.Style.STROKE);
         mLinePaint.setStrokeWidth(mArcDashSize);
-        mLinePaint.setStrokeCap(Paint.Cap.ROUND);
+        mLinePaint.setStrokeCap(Paint.Cap.BUTT);
         mLinePaint.setColor(mArcColor == 0 ? Color.RED : mArcColor);
         mLinePaint.setAntiAlias(true);
 
@@ -292,7 +288,7 @@ public class CircularSliderView extends View {
         } else {
             // draw colored circle
             mPaint.setColor(mStartThumbColor);
-            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
             canvas.drawCircle(mThumbStartX, mThumbStartY, mThumbSize / 2, mPaint);
         }
 
@@ -302,17 +298,12 @@ public class CircularSliderView extends View {
             mEndThumbImage.setBounds(mThumbEndX - mThumbSize / 2, mThumbEndY - mThumbSize / 2, mThumbEndX + mThumbSize / 2, mThumbEndY + mThumbSize / 2);
             mEndThumbImage.draw(canvas);
         } else {
-            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
             mPaint.setColor(mEndThumbColor);
             canvas.drawCircle(mThumbEndX, mThumbEndY, mThumbSize / 2, mPaint);
         }
 
-        if (backgoundImage != null) {
-            // draw png
-            Bitmap bitmap = ((BitmapDrawable)backgoundImage).getBitmap();
-            bitmap = getRoundedShape(bitmap);
-            canvas.drawBitmap(bitmap,getBorderThickness(),getBorderThickness(),mPaint);
-        }
+
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
