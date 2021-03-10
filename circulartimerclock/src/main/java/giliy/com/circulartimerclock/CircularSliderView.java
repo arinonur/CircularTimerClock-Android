@@ -22,6 +22,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import com.thelifeco.thelifecoapp.utils.AppUtils;
+
 
 public class CircularSliderView extends View {
 
@@ -159,8 +161,19 @@ public class CircularSliderView extends View {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircularSlider, defStyleAttr, 0);
 
         // read all available attributes
-        int startHour = a.getInteger(R.styleable.CircularSlider_start_hour, 0);
-        int endHour = a.getInteger(R.styleable.CircularSlider_end_hour, 0);
+        if (AppUtils.getTempHour() != null){
+            int startHour = a.getInteger(R.styleable.CircularSlider_start_hour, AppUtils.getTempHour());
+
+        }else{
+            int startHour = a.getInteger(R.styleable.CircularSlider_start_hour, 0);
+
+        }
+        if (AppUtils.getTempMinute() != null){
+            int endHour = a.getInteger(R.styleable.CircularSlider_end_hour, AppUtils.getTempMinute());
+
+        }else{
+            int endHour = a.getInteger(R.styleable.CircularSlider_end_hour, 8);
+        }
         float startMinutes = a.getFloat(R.styleable.CircularSlider_start_minutes, 0);
         float endMinutes = a.getFloat(R.styleable.CircularSlider_end_minutes, 0);
         int thumbSize = a.getDimensionPixelSize(R.styleable.CircularSlider_thumb_size, 50);
@@ -661,6 +674,26 @@ public class CircularSliderView extends View {
             hourAngle = 360+ hourAngle;
         }
         return hourAngle;
+    }
+
+    public void setStartGradientColor(int startGradientColor) {
+        this.startGradientColor = startGradientColor;
+    }
+
+    public void setStartHourAngle(int startHourAngle) {
+        this.startHourAngle = startHourAngle;
+    }
+
+    public void setStartMinutesAngle(float startMinutesAngle) {
+        this.startMinutesAngle = startMinutesAngle;
+    }
+
+    public void setEndHourAngle(int endHourAngle) {
+        this.endHourAngle = endHourAngle;
+    }
+
+    public void setEndMinutesAngle(float endMinutesAngle) {
+        this.endMinutesAngle = endMinutesAngle;
     }
 
     public float minutesToMinutesAngle(float minutes){

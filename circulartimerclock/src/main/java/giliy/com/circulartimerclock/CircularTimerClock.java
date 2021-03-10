@@ -175,6 +175,22 @@ public class CircularTimerClock extends FrameLayout {
 
     public int getStartHour(){return startHour;}
 
+    public void setStartHour(int startHour) {
+        this.startHour = startHour;
+    }
+
+    public void setEndHour(int endHour) {
+        this.endHour = endHour;
+    }
+
+    public void setStartMinutes(int startMinutes) {
+        this.startMinutes = startMinutes;
+    }
+
+    public void setEndMinutes(int endMinutes) {
+        this.endMinutes = endMinutes;
+    }
+
     public void setClockStyle(boolean isClockInside){
         this.isClockInside = isClockInside;
     }
